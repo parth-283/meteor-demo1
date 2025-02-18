@@ -1,8 +1,10 @@
 import { Meteor } from "meteor/meteor";
 import React, { useState } from "react";
 import { Accounts } from "meteor/accounts-base";
+import { useNavigate } from "react-router-dom";
 
 export const RegisterForm = () => {
+    const navigate = useNavigate()
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState({});
@@ -11,13 +13,15 @@ export const RegisterForm = () => {
     const submit = async (e) => {
         e.preventDefault();
         setError('');
+        setLoading(true)
 
         Accounts.createUser({
             email: username,
             password: password,
             profile: { name: "Parth" }
         }, (error) => {
-            setError(error)
+            setLoading(false)
+            error ? setError(error) : navigate('/')
         });
     };
 

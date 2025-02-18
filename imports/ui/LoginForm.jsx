@@ -1,7 +1,9 @@
 import { Meteor } from "meteor/meteor";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const LoginForm = () => {
+    const navigate = useNavigate()
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState({});
@@ -10,7 +12,7 @@ export const LoginForm = () => {
         e.preventDefault();
 
         Meteor.loginWithPassword(username, password, (error) => {
-            setError(error)
+            error ? setError(error) : navigate('/')
         });
     };
 
