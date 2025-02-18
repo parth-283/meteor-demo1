@@ -201,3 +201,62 @@ header {
   left: 0;
   right: 0;
 }
+
+.clickable-svg-icons {
+  cursor: pointer;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background: rgba(0, 0, 0, 0.267); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  opacity: 0;
+}
+
+/* Sidebars */
+.sidebar {
+  background: white;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: auto;
+  right: 0;
+  width: 25%;
+}
+
+.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* .overlay {
+  top: 4rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  background: #8080808c;
+} */

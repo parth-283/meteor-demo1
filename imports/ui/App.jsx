@@ -7,21 +7,31 @@ import { LoginForm } from './LoginForm.jsx';
 import ProtectedRoute from './Routing/ProtectedRoute.jsx';
 import PrivateRoute from './Routing/PrivateRoute.jsx';
 import { VerifyEmail } from './VerifyEmail.jsx';
+import MenuContext from './Context/menu.jsx';
 
 export const App = () => {
   const [hideCompleted, setHideCompleted] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <div className="app">
+    <MenuContext.Provider
+      value={{
+        setHideCompleted,
+        setIsMenuOpen,
+        state: {
+          hideCompleted,
+          isMenuOpen
+        }
+      }}>
       <Routes>
-        <Route path="/" element={<Layout hideCompleted={hideCompleted} setHideCompleted={setHideCompleted} />} >
-          <Route path="/" index element={<ProtectedRoute> <Task hideCompleted={hideCompleted} /> </ProtectedRoute>} />
+        <Route path="/" element={<Layout />} >
+          <Route path="/" index element={<ProtectedRoute> <Task /> </ProtectedRoute>} />
           <Route path="/login" element={<PrivateRoute> <LoginForm /> </PrivateRoute>} />
           <Route path="/register" element={<PrivateRoute> <RegisterForm /> </PrivateRoute>} />
           <Route path="/verify-email/:token" element={<VerifyEmail />} />
         </Route>
       </Routes>
-    </div>
+    </MenuContext.Provider>
   )
 };
 

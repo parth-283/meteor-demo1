@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useTracker, useSubscribe } from 'meteor/react-meteor-data';
 import { TasksCollection } from "../api/TasksCollection";
 import { TaskForm } from "./TaskForm";
+import MenuContext from "./Context/menu";
 
-export const Task = ({ hideCompleted }) => {
+export const Task = () => {
+    let value = useContext(MenuContext)
+    const { hideCompleted } = value.state
     const isLoading = useSubscribe("tasks");
     const user = useTracker(() => Meteor.user());
 

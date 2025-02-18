@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { TasksCollection } from '../api/TasksCollection.js';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Link, useNavigate } from 'react-router-dom';
+import MenuContext from './Context/menu.jsx';
+/* Import SVGs */
 
-function Header({ hideCompleted, setHideCompleted }) {
-    const navigate = useNavigate();
-    const logout = () => Meteor.logout(() => navigate('/login'));
+function Header() {
+    let value = useContext(MenuContext)
+    const { hideCompleted, isMenuOpen } = value.state
+
     const user = useTracker(() => Meteor.user());
 
     const pendingTasksCount = useTracker(() => {
@@ -37,16 +40,14 @@ function Header({ hideCompleted, setHideCompleted }) {
                             }
                         </nav>
 
-
                         {user && <div className="filter">
-                            <button onClick={() => setHideCompleted(!hideCompleted)}>
+                            <button onClick={() => value.setHideCompleted(!hideCompleted)}>
                                 {hideCompleted ? 'Show All' : 'Hide Completed'}
                             </button>
-
-                            <div className="user" onClick={logout}>
-                                {user.username} 🚪
-                            </div>
                         </div>}
+                        <div>
+                            <img src={`/assets/svgs/menu-${isMenuOpen ? 'open' : 'close'}.svg`} alt={isMenuOpen ? "Menu Open" : "Menu Close"} className='clickable-svg-icons' width={25} onClick={() => value.setIsMenuOpen(!isMenuOpen)} />
+                        </div>
                     </div>
                 </div>
             </header >
