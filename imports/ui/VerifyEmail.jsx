@@ -1,28 +1,26 @@
-const VerifyEmailPage = () => {
-    const { token } = useParams();
-    const location = useLocation();
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-    React.useEffect(() => { // Use useEffect for side effects
+export const VerifyEmail = () => {
+    const { token } = useParams();
+    const navigate = useNavigate();
+    const [error, setError] = useState({});
+
+    useEffect(() => {
         Accounts.verifyEmail(token, (error) => {
             if (error) {
-                console.error("Email verification failed:", error);
-                // Optionally, show an error message to the user, e.g., using state
-                alert("Email verification failed")
+                setError(error)
             } else {
-                console.log("Email verified successfully!");
-                // Redirect to a success page or dashboard.  Navigate is used for this
-                // You would use useNavigate hook here if you want to redirect programmatically
-                window.location.href = '/dashboard' // or use useNavigate if you want to stay in react router
+                navigate('/')
             }
         });
-    }, [token]); // Add token to the dependency array
+    }, [token]);
 
     return (
-        <div>
-            {/* You can show a loading message or a verification status here */}
-            <p>Verifying your email...</p>
-            {/* Or redirect with Navigate component */}
-            {/* <Navigate to="/dashboard" replace={true} /> */}
+        <div className="align-screen-center">
+            <div className={error?.reason ? "error-header" : ""}>
+                <h2>{error?.reason ? error?.reason : "Verifying your email..."}</h2>
+            </div>
         </div>
     );
 };

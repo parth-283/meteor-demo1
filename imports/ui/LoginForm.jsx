@@ -18,7 +18,7 @@ export const LoginForm = () => {
 
     return (
         <form onSubmit={submit} className="login-form">
-            <div>
+             <div className="error-header">
                 <p>{error?.reason}</p>
             </div>
             <div>

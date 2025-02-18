@@ -1,19 +1,11 @@
 {
-  "galaxy.meteor.com": {
-    "env": {
-      "MONGO_URL": "mongodb://127.0.0.1:3001/meteor",
-      "MAIL_URL": "smtp://parth@sourcenettechnology.in:Parth@123@HOST:465"
-    }
-  },
   "public": {
-    "packages": {
-      "accounts": {
-        "clientStorage": "session"
-      }
-    }
+    "APP_NAME": "Meteor Demo"
   },
   "private": {
-    "MONGO_URL": "mongodb://127.0.0.1:3001/meteor",
-    "MAIL_URL": "smtp://parth@sourcenettechnology.in:Parth@123@HOST:465"
+    "MAIL_USERNAME": "parth@sourcenettechnology.in",
+    "MAIL_PASSWORD": "Parth@123",
+    "MAIL_SERVER": "smtp.hostinger.com",
+    "MAIL_PORT": 465
   }
 }
