@@ -1,0 +1,19 @@
+{
+  "galaxy.meteor.com": {
+    "env": {
+      "MONGO_URL": "mongodb://127.0.0.1:3001/meteor",
+      "MAIL_URL": "smtp://parth@sourcenettechnology.in:Parth@123@HOST:465"
+    }
+  },
+  "public": {
+    "packages": {
+      "accounts": {
+        "clientStorage": "session"
+      }
+    }
+  },
+  "private": {
+    "MONGO_URL": "mongodb://127.0.0.1:3001/meteor",
+    "MAIL_URL": "smtp://parth@sourcenettechnology.in:Parth@123@HOST:465"
+  }
+}
