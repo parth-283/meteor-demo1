@@ -18,34 +18,21 @@ Meteor.startup(async () => {
       return `Verify your email for ${Meteor.settings.public.APP_NAME || "Our App"}!`;
     },
     html(user, url) {
+      let verificationUrl = `${Meteor.absoluteUrl()}verify-email/${user.services.email.verificationTokens[0].token}`
       return `
       <html><body>
         <p>Hello ${user.profile?.name || 'there'},</p>
         <p>Thank you for registering. Please verify your email by clicking the link below:</p>
-        <p><a href="${url}">Verify Email</a></p>
+        <p><a href="${verificationUrl}">Verify Email</a></p>
         <p>This link will expire.</p>
       </body></html>
     `;
-    },
-    text(user, url) {
-      return `Hello ${user.profile?.name || 'there'},
-
-      Thank you for registering. Please verify your email by clicking the link below:
-
-      ${url}
-
-      This link will expire.`;
     }
   };
-
 });
 
 Accounts.onCreateUser((options, user) => {
   user.profile = options.profile || {};
-
-  Meteor.setTimeout(() => {
-    Accounts.sendVerificationEmail(user._id);
-  }, 1000);
-
+  Accounts.sendVerificationEmail(user._id);
   return user;
 });
