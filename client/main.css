@@ -26,6 +26,11 @@ button {
   cursor: pointer;
 }
 
+.task-form button {
+  width: 6rem;
+  height: 2.5rem;
+}
+
 button:focus {
   outline: 0;
 }
@@ -102,7 +107,6 @@ header {
 
 .task-form>button {
   min-width: 100px;
-  height: 95%;
   background-color: #315481;
 }
 
@@ -149,15 +153,15 @@ header {
   align-items: center;
 }
 
-.login-form>div {
+.login-form div {
   margin: 8px;
 }
 
-.login-form>div>label {
+.login-form div label {
   font-weight: bold;
 }
 
-.login-form>div>input {
+.login-form div input {
   flex-grow: 1;
   box-sizing: border-box;
   padding: 10px 6px;
@@ -169,26 +173,38 @@ header {
   margin-top: 4px;
 }
 
-.login-form>div>input:focus {
+.login-form div input:focus {
   outline: 0;
 }
 
-.login-form>div>button {
+.login-form .pass-input {
+  position: relative;
+}
+
+.login-form .pass-input .pass-eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+}
+
+.login-form div button {
   background-color: #62807e;
 }
 
-.user {
+.sidebar-nav-list {
   display: flex;
-
   align-self: flex-end;
-
-  margin: 8px 16px 0;
-  font-weight: bold;
+  font-size: 17px;
+  /* font-weight: bold; */
   cursor: pointer;
 }
 
 .error-header {
   color: #ac3642;
+}
+
+.success-header {
+  color: #36ac46;
 }
 
 .align-screen-center {
@@ -213,7 +229,7 @@ header {
   left: 0;
   right: 0;
   bottom: 0;
-  /* background: rgba(0, 0, 0, 0.267); */
+  background: rgba(0, 0, 0, 0.267);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -262,3 +278,10 @@ header {
   position: absolute;
   background: #8080808c;
 } */
+
+.task-container {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+}

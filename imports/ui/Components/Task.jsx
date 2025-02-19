@@ -32,24 +32,26 @@ export const Task = () => {
 
     return (
         <>
-            <TaskForm />
+            <div className="task-container">
+                <TaskForm />
 
-            <ul className="tasks">
-                {
-                    tasks.map((task) => (
-                        <li key={task._id}>
-                            <input
-                                type="checkbox"
-                                checked={!!task.isChecked}
-                                onClick={() => handleToggleChecked(task)}
-                                readOnly
-                            />
-                            <span>{task.text}</span>
-                            <button onClick={() => handleDelete(task)}>&times;</button>
-                        </li>
-                    ))
-                }
-            </ul>
+                <ul className="tasks">
+                    {
+                        tasks.map((task) => (
+                            <li key={task._id}>
+                                <input
+                                    type="checkbox"
+                                    checked={!!task.isChecked}
+                                    onClick={() => handleToggleChecked(task)}
+                                    readOnly
+                                />
+                                <span>{task.text}</span>
+                                <button onClick={() => handleDelete(task)}>&times;</button>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
 
         </>
     );

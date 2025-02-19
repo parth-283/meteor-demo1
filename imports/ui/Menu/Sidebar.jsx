@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import MenuContext from '../Contexts/menu'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTracker } from 'meteor/react-meteor-data';
 
 const Sidebar = () => {
@@ -30,11 +30,46 @@ const Sidebar = () => {
                     </div>
 
                     <ul>
-                        {user && <li>
-                            <div className="user" onClick={logout}>
-                                🚪 LogOut
-                            </div>
-                        </li>}
+                        {user ? <>
+                            <li>
+                                <p className="sidebar-nav-list" onClick={() => {
+                                    value.setIsMenuOpen(!isMenuOpen)
+                                    navigate('/')
+                                }}>
+                                    Home
+                                </p>
+                            </li>
+                            <li>
+                                <p className="sidebar-nav-list" onClick={() => {
+                                    value.setIsMenuOpen(!isMenuOpen)
+                                    navigate('/change-password')
+                                }}>
+                                    Change Password
+                                </p>
+                            </li>
+                            <li>
+                                <p className="sidebar-nav-list" onClick={logout}>
+                                    LogOut
+                                </p>
+                            </li>
+                        </> : <>
+                            <li>
+                                <p className="sidebar-nav-list" onClick={() => {
+                                    value.setIsMenuOpen(!isMenuOpen)
+                                    navigate('/register')
+                                }}>
+                                    Register
+                                </p>
+                            </li>
+                            <li>
+                                <p className="sidebar-nav-list" onClick={() => {
+                                    value.setIsMenuOpen(!isMenuOpen)
+                                    navigate('/login')
+                                }}>
+                                    Login
+                                </p>
+                            </li>
+                        </>}
                     </ul>
                 </div>
             </div>

@@ -31,15 +31,6 @@ function Header() {
                             {pendingTasksTitle}
                         </h1>
 
-                        <nav>
-                            {!user &&
-                                <>
-                                    <Link to="/register">Register</Link> | {" "}
-                                    <Link to="/login">Login</Link>
-                                </>
-                            }
-                        </nav>
-
                         <div>
                             <img src={`/assets/svgs/menu-${isMenuOpen ? 'open' : 'close'}.svg`} alt={isMenuOpen ? "Menu Open" : "Menu Close"} className='clickable-svg-icons' width={25} onClick={() => value.setIsMenuOpen(!isMenuOpen)} />
                         </div>

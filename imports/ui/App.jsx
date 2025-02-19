@@ -8,6 +8,9 @@ import ProtectedRoute from './Routers/ProtectedRoute.jsx';
 import PrivateRoute from './Routers/PrivateRoute.jsx';
 import { VerifyEmail } from './Components/VerifyEmail.jsx';
 import MenuContext from './Contexts/menu.jsx';
+import ChangePassword from './Components/ChangePassword.jsx';
+import ForgotPassword from './Components/ForgotPassword.jsx';
+import { ResetPassword } from './Components/ResetPassword.jsx';
 
 export const App = () => {
   const [hideCompleted, setHideCompleted] = useState(false);
@@ -26,9 +29,13 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Layout />} >
           <Route path="/" index element={<ProtectedRoute> <Task /> </ProtectedRoute>} />
+          <Route path="/change-password" element={<ProtectedRoute> <ChangePassword /> </ProtectedRoute>} />
+
           <Route path="/login" element={<PrivateRoute> <LoginForm /> </PrivateRoute>} />
           <Route path="/register" element={<PrivateRoute> <RegisterForm /> </PrivateRoute>} />
-          <Route path="/verify-email/:token" element={<VerifyEmail />} />
+          <Route path="/forgot-password" element={<PrivateRoute> <ForgotPassword /> </PrivateRoute>} />
+          <Route path="/reset-password/:token" element={<PrivateRoute> <ResetPassword /> </PrivateRoute>} />
+
           <Route path="/verify-email/:token" element={<VerifyEmail />} />
         </Route>
       </Routes>
