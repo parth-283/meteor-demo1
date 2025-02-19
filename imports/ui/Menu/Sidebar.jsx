@@ -1,13 +1,24 @@
 import React, { useContext } from 'react'
-import MenuContext from '../Context/menu'
+import MenuContext from '../Contexts/menu'
 import { useNavigate } from 'react-router-dom';
+import { useTracker } from 'meteor/react-meteor-data';
 
 const Sidebar = () => {
     const navigate = useNavigate();
     let value = useContext(MenuContext)
     const { isMenuOpen } = value.state
 
-    const logout = () => Meteor.logout(() => navigate('/login'));
+    const user = useTracker(() => Meteor.user());
+
+    const logout = () => Meteor.logout(() => {
+        value.setIsMenuOpen(!isMenuOpen)
+        navigate('/login')
+    });
+
+    const handleClose = (e) => {
+        e.stopPropagation()
+        value.setIsMenuOpen(!isMenuOpen)
+    }
 
     return (
         <>
@@ -15,16 +26,15 @@ const Sidebar = () => {
                 <div className="sidebar">
                     <div className='sidebar-header'>
                         <h1>Demo Version</h1>
-                        <img src={`/assets/svgs/menu-open.svg`} alt="Menu Open" className='clickable-svg-icons' width={25} onClick={() => value.setIsMenuOpen(!isMenuOpen)} />
+                        <img src={`/assets/svgs/menu-open.svg`} alt="Menu Open" className='clickable-svg-icons' width={25} onClick={(e) => handleClose(e)} />
                     </div>
 
-
                     <ul>
-                        <li>
+                        {user && <li>
                             <div className="user" onClick={logout}>
-                                LogOut 🚪
+                                🚪 LogOut
                             </div>
-                        </li>
+                        </li>}
                     </ul>
                 </div>
             </div>

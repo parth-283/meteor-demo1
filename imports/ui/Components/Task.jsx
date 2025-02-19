@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { useTracker, useSubscribe } from 'meteor/react-meteor-data';
-import { TasksCollection } from "../api/TasksCollection";
+import { TasksCollection } from "../../api/TasksCollection";
 import { TaskForm } from "./TaskForm";
-import MenuContext from "./Context/menu";
+import MenuContext from "../Contexts/menu";
 
 export const Task = () => {
     let value = useContext(MenuContext)

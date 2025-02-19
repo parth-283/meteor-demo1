@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import MenuContext from "../Contexts/menu";
 
 export const TaskForm = () => {
+    let value = useContext(MenuContext)
+    const { hideCompleted } = value.state
+
     const [text, setText] = useState("");
 
     const handleSubmit = async (e) => {
@@ -16,7 +20,6 @@ export const TaskForm = () => {
         setText("");
     };
 
-
     return (
         <form className="task-form" onSubmit={handleSubmit}>
             <input
@@ -27,6 +30,12 @@ export const TaskForm = () => {
             />
 
             <button type="submit">Add Task</button>
+
+            <div className="filter">
+                <button onClick={() => value.setHideCompleted(!hideCompleted)}>
+                    {hideCompleted ? 'Show All' : 'Hide Completed'}
+                </button>
+            </div>
         </form>
     );
 };
