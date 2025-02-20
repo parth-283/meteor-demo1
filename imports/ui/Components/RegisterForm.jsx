@@ -7,6 +7,7 @@ export const RegisterForm = () => {
     const navigate = useNavigate()
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [isAdmin, setIsAdmin] = useState(false);
     const [error, setError] = useState({});
     const [isToggle, setIsToggle] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -19,7 +20,7 @@ export const RegisterForm = () => {
         Accounts.createUser({
             email: username,
             password: password,
-            profile: { name: "Parth" }
+            profile: { name: "Parth", isAdmin }
         }, async (error) => {
             setLoading(false)
             error ? setError(error) : navigate('/')
@@ -44,6 +45,7 @@ export const RegisterForm = () => {
                     onChange={(e) => setUsername(e.target.value)}
                 />
             </div>
+
             <div className="pass-input">
                 <label htmlFor="password">Password</label>
 
@@ -58,9 +60,21 @@ export const RegisterForm = () => {
                 <img src={`/assets/svgs/eye-${isToggle ? "close" : "show"}.svg`} className='clickable-svg-icons pass-eye-icon' alt="EYE toggle" width={20} onClick={() => setIsToggle(!isToggle)} />
             </div>
 
+            <div className="checkbox-field">
+                <input
+                    id="id_admin"
+                    type="checkbox"
+                    checked={!!isAdmin}
+                    onClick={() => setIsAdmin(!isAdmin)}
+                    readOnly
+                />
+                <label htmlFor="id_admin">As Admin?</label>
+            </div>
+
             <div>
                 <Link to="/login">Have a account?</Link>
             </div>
+
             <div>
                 <button type="submit" disabled={loading}>
                     {loading ? "Registering..." : "Register"}

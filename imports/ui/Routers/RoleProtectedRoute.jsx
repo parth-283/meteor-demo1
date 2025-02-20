@@ -1,19 +1,39 @@
-// Routers/RoleProtectedRoute.jsx
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useTracker } from 'meteor/react-meteor-data';
-import { Roles } from 'meteor/roles';
+import { Meteor } from 'meteor/meteor';
+import LoadingPage from '../Components/LoadingPage';
+import MenuContext from '../Contexts/menu';
 
 const RoleProtectedRoute = ({ roles, children }) => {
-    const user = Meteor.userId();
+    let value = useContext(MenuContext)
+    const { hasRole } = value.state;
+    const [isLoading, setIsLoading] = useState(true);
+    const userId = Meteor.userId();
 
-    if (!user) {
-        return <Navigate to="/login" />;
+    useEffect(() => {
+        if (!userId) {
+            value.setHasRole(false);
+            setIsLoading(false);
+            return;
+        }
+
+        Meteor.call('checkUserRoles', roles, (error, result) => {
+            if (error) {
+                console.error('Error checking roles:', error);
+                value.setHasRole(false);
+            } else {
+                value.setHasRole(result);
+            }
+            setIsLoading(false);
+        });
+
+    }, [userId, roles]);
+
+    if (isLoading) {
+        return <LoadingPage />;
     }
 
-    const hasRole = roles.some(role => Roles.userIsInRoleAsync(user, role));
-
-    return hasRole ? children : <Navigate to="/" />;
+    return hasRole ? children : <Navigate to="/" replace />;
 };
 
 export default RoleProtectedRoute;

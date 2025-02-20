@@ -3,9 +3,11 @@ import { useTracker, useSubscribe } from 'meteor/react-meteor-data';
 import { TasksCollection } from "../../api/Collections/TasksCollection";
 import { TaskForm } from "./TaskForm";
 import MenuContext from "../Contexts/menu";
+import LoadingPage from "./LoadingPage";
 
 export const Task = () => {
-    const [isEdit, setIsEdit] = useState(false)
+    const [isEditId, setIsEditId] = useState('')
+    const [editedValue, setEditedValue] = useState('')
     let value = useContext(MenuContext)
     const { hideCompleted } = value.state
     const isLoading = useSubscribe("tasks");
@@ -28,10 +30,17 @@ export const Task = () => {
 
     const handleDelete = ({ _id }) => Meteor.callAsync("tasks.delete", { _id });
 
-    const handleToggleEdit = ({ _id, text }) => Meteor.callAsync("tasks.edit", { _id, text });
+    const handleToggleEdit = (_id) => {
+        if (!isEditId || isEditId !== _id) {
+            setIsEditId(_id)
+        } else {
+            setIsEditId("")
+            Meteor.callAsync("tasks.edit", { _id, editedValue })
+        }
+    };
 
     if (isLoading()) {
-        return <div className="loading-section"><span className="loading-text">Loading...</span></div>;
+        return <LoadingPage />
     }
 
     return (
@@ -50,14 +59,15 @@ export const Task = () => {
                                     readOnly
                                 />
 
-                                <span> {isEdit ? task.text : <input type="text" value={task.text} onChange={(e) => handleToggleEdit(task._id, e.target.value)} readOnly />} </span>
+                                <span> {isEditId !== task._id ? task.text : <input type="text" value={editedValue || task.text} onChange={(e) => setEditedValue(e.target.value)} />} </span>
 
                                 <div className="button-list">
                                     <button onClick={() => handleDelete(task)} className="button-delete">
                                         <img src={`/assets/svgs/delete.svg`} className='clickable-svg-icons pass-eye-icon' alt="delete-icon" width={20} />
                                     </button>
-                                    <button onClick={() => setIsEdit(!isEdit)} className="button-edit">
-                                        <img src={`/assets/svgs/edit.svg`} className='clickable-svg-icons pass-eye-icon' alt="edit-icon" width={20} />
+
+                                    <button onClick={() => handleToggleEdit(task._id)} className="button-edit">
+                                        <img src={`/assets/svgs/${isEditId == task._id ? 'save' : 'edit'}.svg`} className='clickable-svg-icons pass-eye-icon' alt="edit-icon" width={20} />
                                     </button>
                                 </div>
                             </li>

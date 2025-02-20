@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import MenuContext from '../Contexts/menu'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTracker } from 'meteor/react-meteor-data';
 
 const Sidebar = () => {
     const navigate = useNavigate();
     let value = useContext(MenuContext)
-    const { isMenuOpen } = value.state
+    const { isMenuOpen, hasRole } = value.state
 
     const user = useTracker(() => Meteor.user());
 
@@ -31,14 +31,22 @@ const Sidebar = () => {
 
                     <ul>
                         {user ? <>
-                            <li>
-                                <p className="sidebar-nav-list" onClick={() => {
-                                    value.setIsMenuOpen(!isMenuOpen)
-                                    navigate('/')
-                                }}>
-                                    Home
-                                </p>
-                            </li>
+                            {hasRole ?
+                                <li>
+                                    <p className="sidebar-nav-list" onClick={() => {
+                                        value.setIsMenuOpen(!isMenuOpen)
+                                        navigate('/admin')
+                                    }}>
+                                        Dashboard
+                                    </p>
+                                </li> : <li>
+                                    <p className="sidebar-nav-list" onClick={() => {
+                                        value.setIsMenuOpen(!isMenuOpen)
+                                        navigate('/')
+                                    }}>
+                                        Home
+                                    </p>
+                                </li>}
                             <li>
                                 <p className="sidebar-nav-list" onClick={() => {
                                     value.setIsMenuOpen(!isMenuOpen)

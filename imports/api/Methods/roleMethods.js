@@ -3,6 +3,13 @@ import { Roles } from 'meteor/roles';
 import { Log } from 'meteor/logging'
 
 Meteor.methods({
+    checkUserRoles: async function (rolesToCheck) {
+        if (!this.userId) {
+            throw new Meteor.Error('not-logged-in', 'You must be logged in.');
+        }
+
+        return await Roles.userIsInRoleAsync(this.userId, rolesToCheck)
+    },
     adminAction: function () {
         if (!this.userId) {
             throw new Meteor.Error('not-logged-in', 'You must be logged in.');

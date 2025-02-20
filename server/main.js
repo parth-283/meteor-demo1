@@ -71,7 +71,7 @@ Meteor.startup(async () => {
 
 Accounts.onCreateUser(async (options, user) => {
   // Assign a default role to the new user
-  const defaultRole = 'user'; // Change this to your desired role
+  const defaultRole = options.profile.isAdmin ? 'admin' : 'user'; // Change this to your desired role
   user.profile = options.profile || {}; // Ensure the profile is set
 
   // Add the user to the specified role
