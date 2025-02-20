@@ -11,6 +11,7 @@ import MenuContext from './Contexts/menu.jsx';
 import ChangePassword from './Components/ChangePassword.jsx';
 import ForgotPassword from './Components/ForgotPassword.jsx';
 import { ResetPassword } from './Components/ResetPassword.jsx';
+import RoleProtectedRoute from './Routers/RoleProtectedRoute.jsx';
 
 export const App = () => {
   const [hideCompleted, setHideCompleted] = useState(false);
@@ -28,8 +29,8 @@ export const App = () => {
       }}>
       <Routes>
         <Route path="/" element={<Layout />} >
-          <Route path="/" index element={<ProtectedRoute> <Task /> </ProtectedRoute>} />
-          <Route path="/change-password" element={<ProtectedRoute> <ChangePassword /> </ProtectedRoute>} />
+          <Route path="/" index element={<RoleProtectedRoute roles={['user', 'admin', 'moderator']}> <Task /> </RoleProtectedRoute>} />
+          <Route path="/change-password" element={<RoleProtectedRoute roles={['user', 'admin', 'moderator']}> <ChangePassword /> </RoleProtectedRoute>} />
 
           <Route path="/login" element={<PrivateRoute> <LoginForm /> </PrivateRoute>} />
           <Route path="/register" element={<PrivateRoute> <RegisterForm /> </PrivateRoute>} />

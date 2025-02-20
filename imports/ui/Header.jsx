@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { TasksCollection } from '../api/TasksCollection.js';
+import { TasksCollection } from '../api/Collections/TasksCollection.js';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Link } from 'react-router-dom';
 import MenuContext from './Contexts/menu.jsx';

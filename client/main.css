@@ -26,6 +26,10 @@ button {
   cursor: pointer;
 }
 
+button:hover{
+  box-shadow: 0 3px 3px rgb(89 80 80 / 74%);
+}
+
 .task-form button {
   width: 6rem;
   height: 2.5rem;
@@ -130,9 +134,26 @@ header {
   flex-grow: 1;
 }
 
-.tasks>li>button {
+.tasks>li button {
+  justify-self: flex-end;
+  width: 3rem;
+  height: 2rem;
+}
+
+.tasks>li .button-delete {
   justify-self: flex-end;
   background-color: #ff3046;
+}
+
+.tasks>li .button-edit {
+  justify-self: flex-end;
+  background-color: #cf9b0b;
+}
+
+.button-list {
+  display: flex;
+  gap: 10px;
+
 }
 
 .filter {
@@ -284,4 +305,19 @@ header {
   margin-left: auto;
   margin-right: auto;
   margin-top: 2rem;
+}
+
+.loading-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.loading-section .loading-text {
+  font-size: 2rem;
 }

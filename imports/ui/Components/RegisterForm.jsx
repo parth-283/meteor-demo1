@@ -20,7 +20,7 @@ export const RegisterForm = () => {
             email: username,
             password: password,
             profile: { name: "Parth" }
-        }, (error) => {
+        }, async (error) => {
             setLoading(false)
             error ? setError(error) : navigate('/')
         });
