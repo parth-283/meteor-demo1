@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import "../imports/api/TasksPublications";
 import "../imports/api/Methods/tasksMethods";
-import "../imports/api/Methods/roleMethods";
+import "../imports/api/Methods/usersMethods";
 import "../imports/api/Methods/emailMethods";
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/roles';

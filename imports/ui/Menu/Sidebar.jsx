@@ -6,7 +6,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 const Sidebar = () => {
     const navigate = useNavigate();
     let value = useContext(MenuContext)
-    const { isMenuOpen, hasRole } = value.state
+    const { isMenuOpen, hasRole, currentUserRole } = value.state
 
     const user = useTracker(() => Meteor.user());
 
@@ -31,7 +31,7 @@ const Sidebar = () => {
 
                     <ul>
                         {user ? <>
-                            {hasRole ?
+                            {currentUserRole.includes('admin') ? <>
                                 <li>
                                     <p className="sidebar-nav-list" onClick={() => {
                                         value.setIsMenuOpen(!isMenuOpen)
@@ -39,14 +39,32 @@ const Sidebar = () => {
                                     }}>
                                         Dashboard
                                     </p>
-                                </li> : <li>
+                                </li>
+                                <li>
                                     <p className="sidebar-nav-list" onClick={() => {
                                         value.setIsMenuOpen(!isMenuOpen)
-                                        navigate('/')
+                                        navigate('/admin/users')
                                     }}>
-                                        Home
+                                        Manage Users
                                     </p>
-                                </li>}
+                                </li>
+                                <li>
+                                    <p className="sidebar-nav-list" onClick={() => {
+                                        value.setIsMenuOpen(!isMenuOpen)
+                                        navigate('/admin/tasks')
+                                    }}>
+                                        Manage Tasks
+                                    </p>
+                                </li>
+
+                            </> : <li>
+                                <p className="sidebar-nav-list" onClick={() => {
+                                    value.setIsMenuOpen(!isMenuOpen)
+                                    navigate('/')
+                                }}>
+                                    Home
+                                </p>
+                            </li>}
                             <li>
                                 <p className="sidebar-nav-list" onClick={() => {
                                     value.setIsMenuOpen(!isMenuOpen)

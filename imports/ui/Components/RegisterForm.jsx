@@ -72,7 +72,7 @@ export const RegisterForm = () => {
             </div>
 
             <div>
-                <Link to="/login">Have a account?</Link>
+                <Link to="/login">Have an account?</Link>
             </div>
 
             <div>

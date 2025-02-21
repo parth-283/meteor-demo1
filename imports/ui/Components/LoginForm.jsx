@@ -50,8 +50,13 @@ export const LoginForm = () => {
 
                 <img src={`/assets/svgs/eye-${isToggle ? "close" : "show"}.svg`} className='clickable-svg-icons pass-eye-icon' alt="EYE toggle" width={20} onClick={() => setIsToggle(!isToggle)} />
             </div>
+
             <div>
                 <Link to="/forgot-password">Forgot Password?</Link>
+            </div>
+
+            <div>
+                <Link to="/register">Haven't an account?</Link>
             </div>
 
             <div>

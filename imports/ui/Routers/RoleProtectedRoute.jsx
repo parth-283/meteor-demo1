@@ -17,13 +17,10 @@ const RoleProtectedRoute = ({ roles, children }) => {
             return;
         }
 
-        Meteor.call('checkUserRoles', roles, (error, result) => {
-            if (error) {
-                console.error('Error checking roles:', error);
-                value.setHasRole(false);
-            } else {
-                value.setHasRole(result);
-            }
+        Meteor.callAsync('getUserRoles').then((result) => value.setCurrentUserRole(result));
+
+        Meteor.callAsync('checkUserRoles', roles).then((result) => {
+            value.setHasRole(result);
             setIsLoading(false);
         });
 

@@ -1,4 +1,5 @@
 import { Meteor } from "meteor/meteor";
+import { Roles } from 'meteor/roles';
 import { TasksCollection } from "../Collections/TasksCollection";
 
 Meteor.methods({
@@ -37,5 +38,17 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized', 'You are not authorized to delete todos.');
         }
         return TasksCollection.removeAsync(_id);
+    },
+    "getTotalTasksCount"() {
+        if (!Roles.userIsInRoleAsync(this.userId, 'admin')) {
+            throw new Meteor.Error('not-authorized', 'Only admins can get user counts.');
+        }
+        return TasksCollection.find().countAsync();
+    },
+    "getTotalCompletedTasksCount"() {
+        if (!Roles.userIsInRoleAsync(this.userId, 'admin')) {
+            throw new Meteor.Error('not-authorized', 'Only admins can get user counts.');
+        }
+        return TasksCollection.find({ isChecked: true }).countAsync();
     },
 });
