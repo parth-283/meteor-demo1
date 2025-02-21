@@ -43,6 +43,14 @@ const Sidebar = () => {
                                 <li>
                                     <p className="sidebar-nav-list" onClick={() => {
                                         value.setIsMenuOpen(!isMenuOpen)
+                                        navigate('/')
+                                    }}>
+                                        To Do List
+                                    </p>
+                                </li>
+                                <li>
+                                    <p className="sidebar-nav-list" onClick={() => {
+                                        value.setIsMenuOpen(!isMenuOpen)
                                         navigate('/admin/users')
                                     }}>
                                         Manage Users

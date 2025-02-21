@@ -75,23 +75,38 @@ Meteor.methods({
             throw new Meteor.Error('get-users-error', 'Error getting users in role.');
         }
     },
+    getAllAdminsWithRoles: async function () {
+        if (!Roles.userIsInRoleAsync(this.userId, 'admin')) {
+            throw new Meteor.Error('not-authorized', 'Only admins can get user list.');
+        }
+        try {
+            const admins = await Roles.getUsersInRoleAsync('admin');
+
+            return admins.map(user => ({
+                _id: user._id,
+                name: user.profile.name,
+                email: user.emails[0]?.address
+            }));
+        } catch (error) {
+            console.error("Error getting admins in role:", error);
+            throw new Meteor.Error('get-users-error', 'Error getting admins base to role.');
+        }
+    },
     getAllUsersWithRoles: async function () {
         if (!Roles.userIsInRoleAsync(this.userId, 'admin')) {
             throw new Meteor.Error('not-authorized', 'Only admins can get user list.');
         }
+        try {
+            const users = await Roles.getUsersInRoleAsync('user');
 
-        const users = await Meteor.users.find({}, {
-            fields: {
-                'profile.name': 1,
-                'emails.address': 1,
-                roles: 1
-            }
-        }).fetchAsync();
-
-        return users.map(user => ({
-            _id: user._id,
-            name: user.profile.name,
-            email: user.emails[0]?.address
-        }));
+            return users.map(user => ({
+                _id: user._id,
+                name: user.profile.name,
+                email: user.emails[0]?.address
+            }));
+        } catch (error) {
+            console.error("Error getting users in role:", error);
+            throw new Meteor.Error('get-users-error', 'Error getting users base to role.');
+        }
     },
 });
