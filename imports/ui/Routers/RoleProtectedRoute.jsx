@@ -24,7 +24,7 @@ const RoleProtectedRoute = ({ roles, children }) => {
             setIsLoading(false);
         });
 
-    }, [userId, roles]);
+    }, [userId]);
 
     if (isLoading) {
         return <LoadingPage />;

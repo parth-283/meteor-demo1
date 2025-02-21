@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/roles';
-import { Log } from 'meteor/logging'
 
 Meteor.methods({
     checkUserRoles: async function (rolesToCheck) {
@@ -51,9 +50,9 @@ Meteor.methods({
         try {
             const users = await Roles.getUsersInRoleAsync('user');
 
-            const usersWithDetails = await users.map(user => user).filter((user) => !user.isDeleted);
+            const usersWithDetails = await users.map(user => user);
 
-            return usersWithDetails.length;
+            return usersWithDetails.filter((user) => !user.isDeleted).length;
         } catch (error) {
             console.error("Error getting users in role:", error);
             throw new Meteor.Error('get-users-error', 'Error getting users in role.');
@@ -67,9 +66,9 @@ Meteor.methods({
         try {
             const admins = await Roles.getUsersInRoleAsync('admin');
 
-            const usersWithDetails = await admins.map(admin => admin).filter((admin) => !admin.isDeleted);
+            const usersWithDetails = await admins.map(admin => admin);
 
-            return usersWithDetails.length;
+            return usersWithDetails.filter((admin) => !admin.isDeleted).length;
         } catch (error) {
             console.error("Error getting admins in role:", error);
             throw new Meteor.Error('get-admins-error', 'Error getting admins in role.');
@@ -82,14 +81,14 @@ Meteor.methods({
         try {
             const admins = await Roles.getUsersInRoleAsync('admin');
 
-            return admins.filter((admin) => !admin.isDeleted).map(admin => ({
+            return (await admins.map(admin => ({
                 _id: admin._id,
                 name: admin.profile.name,
                 email: admin.emails[0]?.address
-            }));
+            }))).filter((admin) => !admin.isDeleted);
         } catch (error) {
             console.error("Error getting admins in role:", error);
-            throw new Meteor.Error('get-users-error', 'Error getting admins base to role.');
+            throw new Meteor.Error('get-all-admins-with-roles-error', 'Error getting admins base to role.');
         }
     },
     getAllUsersWithRoles: async function () {
@@ -99,14 +98,15 @@ Meteor.methods({
         try {
             const users = await Roles.getUsersInRoleAsync('user');
 
-            return users.filter((user) => !user.isDeleted).map(user => ({
+            return (await users.map(user => ({
                 _id: user._id,
                 name: user.profile.name,
+                isDeleted: user.isDeleted,
                 email: user.emails[0]?.address
-            }));
+            }))).filter((user) => !user.isDeleted);
         } catch (error) {
             console.error("Error getting users in role:", error);
-            throw new Meteor.Error('get-users-error', 'Error getting users base to role.');
+            throw new Meteor.Error('get-all-users-with-roles-error', 'Error getting users base to role.');
         }
     },
 });
