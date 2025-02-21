@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import LoadingPage from '../LoadingPage'
 
-const UserDetail = () => {
+const Details = () => {
     const { id } = useParams()
     const navigate = useNavigate()
     const [user, setUser] = useState([])
@@ -59,7 +59,7 @@ const UserDetail = () => {
 
                         <div className="button-group">
                             <button className="edit-button" onClick={() => setIsEdit(true)}>Edit</button>
-                            <button className="cancel-button" onClick={() => navigate('/admin/users')}>Back</button>
+                            <button className="cancel-button" onClick={() => navigate(`/admin/${user.roles?.includes('admin') ? 'list' : 'users'}`)}>Back</button>
                         </div>
                     </div>
                 )}
@@ -68,4 +68,4 @@ const UserDetail = () => {
     )
 }
 
-export default UserDetail
+export default Details

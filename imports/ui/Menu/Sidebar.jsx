@@ -59,9 +59,9 @@ const Sidebar = () => {
                                 <li>
                                     <p className="sidebar-nav-list" onClick={() => {
                                         value.setIsMenuOpen(!isMenuOpen)
-                                        navigate('/admin/tasks')
+                                        navigate('/admin/list')
                                     }}>
-                                        Manage Tasks
+                                        Manage Admins
                                     </p>
                                 </li>
 

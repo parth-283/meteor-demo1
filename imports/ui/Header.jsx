@@ -26,10 +26,12 @@ function Header() {
             <header>
                 <div className="app-bar">
                     <div className="app-header">
-                        <h1>
-                            📝️ To Do List
-                            {pendingTasksTitle}
-                        </h1>
+                        <Link to={'/'}>
+                            <h1>
+                                📝️ To Do List
+                                {pendingTasksTitle}
+                            </h1>
+                        </Link>
 
                         <div>
                             <img src={`/assets/svgs/menu-${isMenuOpen ? 'open' : 'close'}.svg`} alt={isMenuOpen ? "Menu Open" : "Menu Close"} className='clickable-svg-icons' width={25} onClick={() => value.setIsMenuOpen(!isMenuOpen)} />

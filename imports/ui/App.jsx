@@ -15,7 +15,8 @@ import Dashboard from './Components/Admin/Dashboard.jsx';
 import NotFound from './Components/Errors/NotFound.jsx';
 import UserList from './Components/Admin/UserList.jsx';
 import { useTracker } from 'meteor/react-meteor-data.js';
-import UserDetail from './Components/Admin/UserDetail.jsx';
+import Details from './Components/Admin/Details.jsx';
+import AdminsList from './Components/Admin/AdminsList.jsx';
 
 export const App = () => {
   const [hideCompleted, setHideCompleted] = useState(false);
@@ -46,7 +47,11 @@ export const App = () => {
             <Route index element={<RoleProtectedRoute roles={['admin']}><Dashboard /></RoleProtectedRoute>} />
             <Route path="users">
               <Route index element={<RoleProtectedRoute roles={['admin']}><UserList /></RoleProtectedRoute>} />
-              <Route path=":id" element={<RoleProtectedRoute roles={['admin']}><UserDetail /></RoleProtectedRoute>} />
+              <Route path=":id" element={<RoleProtectedRoute roles={['admin']}><Details /></RoleProtectedRoute>} />
+            </Route>
+            <Route path="list">
+              <Route index element={<RoleProtectedRoute roles={['admin']}><AdminsList /></RoleProtectedRoute>} />
+              <Route path=":id" element={<RoleProtectedRoute roles={['admin']}><Details /></RoleProtectedRoute>} />
             </Route>
           </Route>
 
