@@ -45,6 +45,12 @@ export const Task = () => {
 
     return (
         <>
+            <SEO
+                title="TO DO | Demo1"
+                description="Welcome to todo"
+                url="/"
+            />
+
             <div className="task-container">
                 <TaskForm />
 

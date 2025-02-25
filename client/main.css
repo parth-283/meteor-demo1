@@ -24,9 +24,6 @@ button {
   box-shadow: 0 3px 3px rgba(34, 25, 25, 0.4);
   padding: 5px;
   cursor: pointer;
-}
-
-.login-form div button {
   background-color: #62807e;
 }
 
@@ -432,7 +429,7 @@ header {
 .dashboard-cards {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   margin-bottom: 20px;
   gap: 10px;
 }
@@ -443,7 +440,7 @@ header {
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 20px;
-  width: 30%;
+  max-width: 46%;
   text-align: center;
 }
 
@@ -580,4 +577,111 @@ header {
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+/* ContactUs.css */
+.contact-us-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-us-container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.contact-us-container p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  /* margin-bottom: 15px; */
+  margin: 0 3.5% 15px 0px;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.contact-info {
+  margin-top: 30px;
+}
+
+.contact-info h2 {
+  margin-bottom: 10px;
+}
+
+.contact-info p {
+  margin: 5px 0;
+}
+
+/* Navbar Dropdown  */
+
+.dropdown-container {
+  perspective: 1000px;
+}
+
+.dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-header p {
+  display: flex;
+  align-self: flex-end;
+  font-size: 17px;
+  margin: 0;
+}
+
+.dropdown-icon {
+  transition: transform 0.6s ease;
+}
+
+.dropdown-open img {
+  transform: rotate(180deg);
+}
+
+.dropdown-container ul {
+  display: flex;
+  flex-direction: column;
+  visibility: hidden;
+  height: 0;
+  opacity: 0;
+  transition: height 0.4s ease, visibility 0.6s ease, opacity 0.6s ease;
+}
+
+.dropdown-open .dropdown-menu-list {
+  visibility: visible;
+  opacity: 1;
+  height: 8rem;
+}
+
+.dropdown-menu-list p {
+  margin: 8px 0 4px 20px;
 }

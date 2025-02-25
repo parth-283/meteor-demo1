@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import "../imports/api/TasksPublications";
 import "../imports/api/Methods/tasksMethods";
 import "../imports/api/Methods/usersMethods";
+import "../imports/api/Methods/ContactsMethods";
+import "../imports/api/Methods/DashboardMethods";
 import "../imports/api/Methods/emailMethods";
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/roles';
@@ -10,6 +12,7 @@ Meteor.startup(async () => {
 
   Accounts.config({
     sendVerificationEmail: true,
+    loginExpirationInDays: 1
   });
 
   // Create roles if they don't exist

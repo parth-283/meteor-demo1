@@ -1,4 +1,3 @@
-import { useTracker } from 'meteor/react-meteor-data'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 

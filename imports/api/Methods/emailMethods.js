@@ -11,7 +11,7 @@ Meteor.methods({
         try {
             return await Email.sendAsync({ to, from, subject, text });
         } catch (err) {
-            console.log(err, "ERORRRR#####################################");
+            console.log(err, "ERROR: On send email.");
         }
     },
 });
