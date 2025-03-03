@@ -66,7 +66,7 @@ export const RegisterForm = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
 
-                    <img src={`/assets/svgs/eye-${isToggle ? "close" : "show"}.svg`} className='clickable-svg-icons pass-eye-icon' alt="EYE toggle" width={20} onClick={() => setIsToggle(!isToggle)} />
+                    <img src={`/assets/svgs/eye-${isToggle ? "close" : "show"}.svg`} id="eye-icon" className='clickable-svg-icons pass-eye-icon' alt="EYE toggle" width={20} onClick={() => setIsToggle(!isToggle)} />
                 </div>
 
                 <div className="checkbox-field">
