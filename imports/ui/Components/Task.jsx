@@ -30,12 +30,13 @@ export const Task = () => {
 
     const handleDelete = ({ _id }) => Meteor.callAsync("tasks.delete", { _id });
 
-    const handleToggleEdit = (_id) => {
-        if (!isEditId || isEditId !== _id) {
-            setIsEditId(_id)
+    const handleToggleEdit = (task) => {
+        if (!isEditId || isEditId !== task._id) {
+            setEditedValue(task.text)
+            setIsEditId(task._id)
         } else {
             setIsEditId("")
-            Meteor.callAsync("tasks.edit", { _id, editedValue })
+            Meteor.callAsync("tasks.edit", { _id: task._id, editedValue })
         }
     };
 
@@ -52,7 +53,7 @@ export const Task = () => {
             />
 
             <div className="task-container">
-                <TaskForm />
+                <TaskForm tasks={tasks} />
 
                 <ul className="tasks">
                     {
@@ -72,7 +73,7 @@ export const Task = () => {
                                         <img src={`/assets/svgs/delete.svg`} className='clickable-svg-icons pass-eye-icon' alt="delete-icon" width={20} />
                                     </button>
 
-                                    <button onClick={() => handleToggleEdit(task._id)} className="button-edit">
+                                    <button onClick={() => handleToggleEdit(task)} className="button-edit">
                                         <img src={`/assets/svgs/${isEditId == task._id ? 'save' : 'edit'}.svg`} className='clickable-svg-icons pass-eye-icon' alt="edit-icon" width={20} />
                                     </button>
                                 </div>

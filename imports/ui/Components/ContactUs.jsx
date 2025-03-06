@@ -22,8 +22,12 @@ const ContactUs = () => {
         setSuccessMessage('');
         setErrorMessage('');
 
+        if (!formData.name || !formData.email || !formData.message) {
+            setErrorMessage("Name, Email, and Message are required fields.")
+            return
+        }
+
         try {
-            debugger
             await Meteor.callAsync("contacts.insert", {
                 ...formData,
                 createdAt: new Date(),
@@ -47,48 +51,45 @@ const ContactUs = () => {
             />
 
             <div className="contact-us-container">
-                <h1>Contact Us</h1>
-                <p>If you have any questions, comments, or feedback, please feel free to reach out to us using the form below or through our contact information.</p>
-
                 <div className={successMessage ? "success-header" : "error-header"}>
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
                     {successMessage && <p className="success-message">{successMessage}</p>}
                 </div>
 
+                <h1>Contact Us</h1>
+                <p>If you have any questions, comments, or feedback, please feel free to reach out to us using the form below or through our contact information.</p>
+
                 <form onSubmit={handleSubmit} className="contact-form">
                     <div className="form-group">
-                        <label htmlFor="name">Name:</label>
+                        <label htmlFor="name">*Name:</label>
                         <input
                             type="text"
                             id="name"
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
-                            required
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="email">Email:</label>
+                        <label htmlFor="email">*Email:</label>
                         <input
                             type="email"
                             id="email"
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
-                            required
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="message">Message:</label>
+                        <label htmlFor="message">*Message:</label>
                         <textarea
                             id="message"
                             name="message"
                             value={formData.message}
                             onChange={handleChange}
-                            required
                         ></textarea>
                     </div>
-                    <button type="submit" disabled={isSubmitting}>
+                    <button type="submit" id="contact_btn" disabled={isSubmitting}>
                         {isSubmitting ? 'Sending...' : 'Send Message'}
                     </button>
                 </form>

@@ -34,7 +34,7 @@ function Header() {
                         </Link>
 
                         <div>
-                            <img src={`/assets/svgs/menu-${isMenuOpen ? 'open' : 'close'}.svg`} alt={isMenuOpen ? "Menu Open" : "Menu Close"} className='clickable-svg-icons' width={25} onClick={() => value.setIsMenuOpen(!isMenuOpen)} />
+                            <img src={`/assets/svgs/menu-${isMenuOpen ? 'open' : 'close'}.svg`} id='menu-toggle' alt={isMenuOpen ? "Menu Open" : "Menu Close"} className='clickable-svg-icons' width={25} onClick={() => value.setIsMenuOpen(!isMenuOpen)} />
                         </div>
                     </div>
                 </div>

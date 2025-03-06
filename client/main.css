@@ -267,6 +267,10 @@ header {
   color: #ac3642;
 }
 
+.task-form-container>.error-header {
+  margin: 16px;
+}
+
 .success-header {
   color: #36ac46;
 }

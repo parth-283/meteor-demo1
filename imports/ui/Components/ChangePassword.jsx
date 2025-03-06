@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const ChangePassword = () => {
+    const navigate = useNavigate()
     const [changePassword, setChangePassword] = useState({ oldPassword: "", newPassword: "" })
     const [error, setError] = useState();
     const [success, setSuccess] = useState('');
@@ -11,19 +13,39 @@ const ChangePassword = () => {
     const submit = (e) => {
         e.preventDefault();
         setLoading(true)
+        setError(null)
+        setSuccess(null)
+
+        if (!changePassword.oldPassword || !changePassword.newPassword) {
+            setError({ reason: "Old Password and New Password are required." })
+            return
+        }
 
         Accounts.changePassword(
             changePassword.oldPassword,
             changePassword.newPassword,
             (error) => {
                 setLoading(false)
-                error ? setError(error) : setSuccess('Your password change successfully.')
+                if (error) {
+                    setError(error)
+                } else {
+                    setSuccess('Your password change successfully.')
+                    Meteor.logout(() => {
+                        navigate('/login')
+                    });
+                }
             },
         );
     }
 
     return (
         <>
+            <SEO
+                title="Change Password | Demo1"
+                description="Welcome to Change Password"
+                url="/change-password"
+            />
+
             <form onSubmit={submit} className="login-form">
                 {(success || error) && <div className={success ? "success-header" : "error-header"}>
                     <p>{success ? success : error?.reason}</p>
@@ -39,7 +61,6 @@ const ChangePassword = () => {
                         type={isOldPasswordToggle ? "text" : "password"}
                         placeholder="Old Password"
                         name="oldPassword"
-                        required
                         onChange={(e) => setChangePassword({ ...changePassword, [e.target.name]: e.target.value })}
                     />
 
@@ -53,7 +74,6 @@ const ChangePassword = () => {
                         type={isToggle ? "text" : "password"}
                         placeholder="Password"
                         name="newPassword"
-                        required
                         onChange={(e) => setChangePassword({ ...changePassword, [e.target.name]: e.target.value })}
                     />
 
@@ -61,7 +81,7 @@ const ChangePassword = () => {
                 </div>
 
                 <div>
-                    <button type="submit"> {loading ? "Saving..." : "Save"}</button>
+                    <button id="change-pwd-btn" type="submit"> {loading ? "Saving..." : "Save"}</button>
                 </div>
             </form>
         </>
