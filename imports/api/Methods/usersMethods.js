@@ -27,7 +27,8 @@ Meteor.methods({
             _id: users._id,
             name: users.profile.name,
             email: users.emails[0]?.address,
-            roles: roles
+            roles: roles,
+            isAdmin:users.profile.isAdmin
         }
     },
     updateUserProfile: function (_id, data) {
@@ -84,7 +85,8 @@ Meteor.methods({
             return (await admins.map(admin => ({
                 _id: admin._id,
                 name: admin.profile.name,
-                email: admin.emails[0]?.address
+                email: admin.emails[0]?.address,
+                isAdmin:admin.profile.isAdmin
             }))).filter((admin) => !admin.isDeleted);
         } catch (error) {
             console.error("Error getting admins in role:", error);
@@ -102,7 +104,8 @@ Meteor.methods({
                 _id: user._id,
                 name: user.profile.name,
                 isDeleted: user.isDeleted,
-                email: user.emails[0]?.address
+                email: user.emails[0]?.address,
+                isAdmin:user.profile.isAdmin
             }))).filter((user) => !user.isDeleted);
         } catch (error) {
             console.error("Error getting users in role:", error);

@@ -66,7 +66,7 @@ export const Task = () => {
                                     readOnly
                                 />
 
-                                <span> {isEditId !== task._id ? task.text : <input type="text" value={editedValue || task.text} onChange={(e) => setEditedValue(e.target.value)} />} </span>
+                                <span className="truncate"> {isEditId !== task._id ? task.text : <input type="text" value={editedValue || task.text} onChange={(e) => setEditedValue(e.target.value)} />} </span>
 
                                 <div className="button-list">
                                     <button onClick={() => handleDelete(task)} className="button-delete">

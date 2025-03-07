@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import LoadingPage from '../LoadingPage'
 
 const Details = () => {
@@ -33,7 +33,7 @@ const Details = () => {
     return (
         <div className='center-container'>
             <div className="user-detail-container">
-                <h2 className="user-detail-title">User  Details</h2>
+                <h2 className="user-detail-title">{user.isAdmin ? "Admin" : "User"}  Details</h2>
                 {isEdit ? (
                     <div className="login-form">
                         <div>
@@ -53,12 +53,11 @@ const Details = () => {
                     </div>
                 ) : (
                     <div className="user-info">
-                        <p><strong>Username:</strong> {user.name}</p>
+                        <div className='user-editable-info'> <p><strong>Username:</strong> {user.name}</p> <Link to="javascript:void(0)" className="edit-span" onClick={() => setIsEdit(true)}>Edit</Link></div>
                         <p><strong>Email:</strong> {user.email}</p>
                         <p><strong>Roles:</strong> {user.roles?.join(', ')}</p>
 
-                        <div className="button-group">
-                            <button className="edit-button" onClick={() => setIsEdit(true)}>Edit</button>
+                        <div className="button-group right-align">
                             <button className="cancel-button" onClick={() => navigate(`/admin/${user.roles?.includes('admin') ? 'list' : 'users'}`)}>Back</button>
                         </div>
                     </div>

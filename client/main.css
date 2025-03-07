@@ -40,6 +40,10 @@ button:focus {
   outline: 0;
 }
 
+.right-align {
+  justify-content: end;
+}
+
 .button-group {
   display: flex;
   margin-top: 1rem;
@@ -149,7 +153,6 @@ header {
   border: 1px solid #aaa;
   width: 100%;
   font-size: 1em;
-  margin-right: 16px;
 }
 
 .task-form>input:focus {
@@ -179,6 +182,7 @@ header {
 
 .tasks>li>span {
   flex-grow: 1;
+  margin: 0 13rem 0 6px;
 }
 
 .tasks>li button {
@@ -557,6 +561,12 @@ header {
   text-align: center;
 }
 
+.user-editable-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .user-info {
   margin-bottom: 20px;
 }
@@ -688,4 +698,68 @@ header {
 
 .dropdown-menu-list p {
   margin: 8px 0 4px 20px;
+}
+
+
+/* Set paragraph length */
+.truncate {
+  display: -webkit-box;
+  /* Enables the flex container */
+  -webkit-line-clamp: 2;
+  /* Limits the element to 3 lines */
+  -webkit-box-orient: vertical;
+  /* Establishes the orientation */
+  overflow: hidden;
+  /* Hides overflowing content */
+  text-overflow: ellipsis;
+  /* Adds '...' at the end of truncated text */
+}
+
+
+/* Responsive Style */
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 32%;
+  }
+}
+
+@media (max-width: 425px) {
+  .sidebar {
+    width: 100%;
+    left: unset;
+    right: unset;
+    height: 100vh;
+    position: unset;
+  }
+
+  .task-form {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .contact-us-container {
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .task-container {
+    width: 100%;
+  }
+
+  .tasks>li>span {
+    margin: 0 4px 0 2px;
+  }
+
+  .button-group {
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+
+  .save-button,
+  .cancel-button,
+  .edit-button,
+  .delete-button {
+    padding: 6px 8px;
+  }
 }
